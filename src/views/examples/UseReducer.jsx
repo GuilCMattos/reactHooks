@@ -2,33 +2,8 @@ import React from 'react'
 import { useReducer } from 'react';
 import PageTitle from '../../components/layout/PageTitle'
 
-const initialState = { 
-    cart: [],
-    products: [],
-    user: null,
-    number: 0
-}
-
-// add 7, dividir 25, parse, addN
-
-function reducer(state, action) { 
-    switch(action.type){ 
-        case 'number_add2': 
-        return {...state, number: state.number +2}
-        case 'login':
-            return {...state, user: { name: action.payload }}
-        case 'number_add7':
-            return {...state, number: state.number * 7}
-        case 'div25':
-            return {...state, number: state.number / 25}
-        case 'parse':
-            return {...state, number: parseInt(state.number)}
-        case 'addN':
-            return {...state, number: state.number + action.num}
-        default:
-            return state
-    }
-}
+import {initialState, reducer} from '../../store'
+import {login, numberAdd2, numberAddN, numberDiv25, numberMulti7, parse} from '../../store/actions'
 
 const UseReducer = (props) => {
 
@@ -51,27 +26,27 @@ const UseReducer = (props) => {
                 </span>
 
                 <div>
-                   <button onClick={e => dispatch({type: 'login', payload: 'Maria'})} className="btn">
+                   <button onClick={e => login(dispatch, 'Guilherme')} className="btn">
                     Login
                    </button>
-                    <button onClick={e => dispatch({type: 'number_add2'})} className="btn">
+                    <button onClick={e => numberAdd2(dispatch)} className="btn">
                         +2
                     </button>
 
-                    <button onClick={e => dispatch({type: 'number_add7'})} className="btn">
+                    <button onClick={e => numberMulti7(dispatch)} className="btn">
                         *7
                     </button>
 
-                    <button onClick={e => dispatch({type: 'div25'})} className="btn">
+                    <button onClick={e => numberDiv25(dispatch)} className="btn">
                         /25
                     </button>
 
-                    <button onClick={e => dispatch({type: 'parse'})} className="btn">
+                    <button onClick={e => parse(dispatch)} className="btn">
                         Parse
                     </button>
 
-                    <button onClick={e => dispatch({type: 'addN', num: 15})} className="btn">
-                        AddN
+                    <button onClick={e => numberAddN(dispatch, 20)} className="btn">
+                        +20
                     </button>
                 </div>
             </div>
