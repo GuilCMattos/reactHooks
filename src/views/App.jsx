@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from  'react-router-dom'
 import Menu from '../components/layout/Menu'
 import Content from '../components/layout/Content'
 import DataContext, {data} from '../data/DataContext'
+import Store from '../data/Store.jsx'
 import { useState } from 'react'
 
 const App = props => {
@@ -14,16 +15,17 @@ const App = props => {
 
 
     return (
-        <DataContext.Provider value={{state, setState}}>
-
-        <div className="App">
-                    <Router>
-                        <Menu />
-                        <Content />
-                    </Router>
-                </div>
-
-        </DataContext.Provider>
+        
+        <Store>
+            <DataContext.Provider value={{state, setState}}>
+            <div className="App">
+                        <Router>
+                            <Menu />
+                            <Content />
+                        </Router>
+                    </div>
+            </DataContext.Provider>
+        </Store>
                
     )
 }
